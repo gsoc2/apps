@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -50,7 +50,9 @@ it('should display a toast notification', async () => {
   await screen.findByRole('alert');
   await screen.findByText('Sample Notification');
   await act(() => new Promise((resolve) => setTimeout(resolve, 1500))); // wait for the toast to expire
-  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  await waitFor(() =>
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument(),
+  );
 });
 
 it('should display a toast notification and be dismissable', async () => {
