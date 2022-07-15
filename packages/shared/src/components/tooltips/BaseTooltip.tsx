@@ -3,7 +3,6 @@ import Tippy, { TippyProps } from '@tippyjs/react';
 import classNames from 'classnames';
 import styles from './BaseTooltip.module.css';
 import { isTouchDevice } from '../../lib/tooltip';
-import { isTesting } from '../../lib/constants';
 import {
   BaseTooltipContainer,
   BaseTooltipContainerProps,
@@ -13,8 +12,7 @@ import {
 const DEFAULT_DELAY_MS = 300;
 const DEFAULT_DURATION = 200;
 
-export const getShouldLoadTooltip = (): boolean =>
-  !isTouchDevice() && !isTesting;
+export const getShouldLoadTooltip = (): boolean => !isTouchDevice();
 
 export interface TooltipProps
   extends Pick<
