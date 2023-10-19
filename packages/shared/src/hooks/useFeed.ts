@@ -21,6 +21,7 @@ import {
   removeCachedPagePost,
   updateCachedPagePost,
 } from '../lib/query';
+import { commonRequestHeaders } from '../lib/headers';
 
 export type PostItem = {
   type: 'post';
@@ -112,7 +113,9 @@ export default function useFeed<T>(
   const adsQuery = useInfiniteQuery<Ad>(
     ['ads', ...feedQueryKey],
     async ({ pageParam }) => {
-      const res = await fetch(`${apiUrl}/v1/a?active=${!!pageParam}`);
+      const res = await fetch(`${apiUrl}/v1/a?active=${!!pageParam}`, {
+        headers: { ...commonRequestHeaders },
+      });
       const ads: Ad[] = await res.json();
       return ads[0];
     },
