@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import request, { RequestDocument, Variables } from 'graphql-request';
+import request from 'graphql-request';
 import { useQueryClient } from 'react-query';
 import { RequestProtocol, REQUEST_PROTOCOL_KEY } from '../graphql/common';
 import { commonRequestHeaders } from '../lib/headers';
@@ -14,21 +14,13 @@ export const useRequestProtocol = (): RequestProtocol => {
     const fetcher = fetchMethod || fetch;
 
     return {
-      requestMethod: <T extends unknown, V extends Variables>(
-        url: string,
-        document: RequestDocument,
-        variables?: V,
-        requestHeaders?: HeadersInit,
-      ): Promise<T> =>
+      requestMethod: (url, document, variables, requestHeaders) =>
         requester(url, document, variables, {
           ...requestHeaders,
           ...commonRequestHeaders,
         }),
 
-      fetchMethod: (
-        input: RequestInfo | URL,
-        init?: RequestInit,
-      ): Promise<Response> =>
+      fetchMethod: (input, init) =>
         fetcher(input, {
           ...init,
           headers: { ...init?.headers, ...commonRequestHeaders },
