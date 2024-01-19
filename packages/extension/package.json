@@ -37,7 +37,7 @@
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-query-devtools": "^4.35.3",
     "react-swipeable": "^6.2.2",
-    "react-tooltip": "^4.2.21",
+    "react-tooltip": "^5.25.1",
     "react-transition-group": "^4.4.2",
     "react-virtual": "^2.10.4",
     "webextension-polyfill-ts": "^0.22.0"
